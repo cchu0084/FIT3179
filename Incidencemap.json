@@ -84,10 +84,10 @@
           "legend": {"title": "ASR (per 100,000)"}
         },
         "tooltip": [
-          {"field": "State", "title": "State/Territory:"},
-          {"field": "Year", "title": "Year:"},
-          {"field": "Count", "title": "Number of cases:"},
-          {"field": "ASRnum", "title": "ASR (per 100,000):"}
+          {"field": "State", "title": "State/Territory"},
+          {"field": "Year", "title": "Year"},
+          {"field": "Count", "title": "Cancer Cases"},
+          {"field": "ASRnum", "title": "ASR (per 100,000)"}
         ]
       }
     },
