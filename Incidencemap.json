@@ -84,15 +84,15 @@
           "legend": {"title": "ASR (per 100,000)"}
         },
         "tooltip": [
-          {"field": "State", "title": "State/Territory"},
-          {"field": "Year", "title": "Year"},
-          {"field": "Count", "title": "Cancer Cases"},
-          {"field": "ASRnum", "title": "ASR (per 100,000)"}
+          {"field": "State", "title": "State/Territory:"},
+          {"field": "Year", "title": "Year:"},
+          {"field": "Count", "title": "Number of cases:"},
+          {"field": "ASRnum", "title": "ASR (per 100,000):"}
         ]
       }
     },
     {
-      "data": {"values": [{"note": "Data source: Australian Institute of Health and Welfare"}]},
+      "data": {"values": [{"note": "Rates for this chart are age-standardised to the 2024 Australian population."}]},
       "mark": {
         "type": "text",
         "align": "left",
