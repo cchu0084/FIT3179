@@ -92,7 +92,7 @@
       }
     },
     {
-      "data": {"values": [{"note": "Rates for this chart are age-standardised to the 2024 Australian population."}]},
+      "data": {"values": [{"note": "Data source: Australian Institute of Health and Welfare"}]},
       "mark": {
         "type": "text",
         "align": "left",
