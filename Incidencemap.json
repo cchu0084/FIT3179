@@ -1,0 +1,114 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 550,
+  "height": 510,
+  "title": "Age-Standardised Rate (ASR) for Melanoma incidence by state from 2012 to 2020",
+  "projection": {
+    "type": "mercator",
+    "center": [134, -28],
+    "scale": 750
+  },
+  "params": [
+    {
+      "name": "year_selection",
+      "value": 2020,
+      "bind": {
+        "input": "select",
+        "options": [2012,2013,2014,2015,2016,2017,2018,2019,2020],
+        "name": "Choose Year: "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/cchu0084/FIT3179/refs/heads/main/ausmapwgrati.json",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "mark": {"type": "geoshape", "stroke": "lightgrey","strokeWidth": 0.5}
+    },
+    {
+      "data": {"graticule": {"step": [5, 5]}},
+      "mark": {"type": "geoshape", "stroke": "lightgrey","strokeWidth": 0.5}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/cchu0084/FIT3179/refs/heads/main/week10data_cleaned3.csv",
+        "format": {"type": "csv"}
+      },
+      "transform": [
+        {"filter": "toNumber(datum.Year) == year_selection"},
+        {
+          "lookup": "State",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/cchu0084/FIT3179/refs/heads/main/ausmapwgrati.json",
+              "format": {
+                "type": "topojson",
+                "feature": "ne_10m_admin_1_states_provinces"
+              }
+            },
+            "key": "properties.name",
+            "fields": ["properties", "geometry"]
+          },
+          "as": ["map_properties", "map_geometry"]
+        },
+        {"calculate": "toNumber(datum.ASR)", "as": "ASRnum"}
+      ],
+      "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 0.5},
+      "encoding": {
+        "shape": {"field": "map_geometry", "type": "geojson"},
+        "color": {
+          "field": "ASRnum",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [10,20,30,40,50,60,70,80,90,100],
+            "range": [
+              "#fff3e0",
+              "#ffe0b2",
+              "#ffcc80",
+              "#ffb74d",
+              "#ffa726",
+              "#fb8c00",
+              "#f57c00",
+              "#ef6c00",
+              "#e65100",
+              "#3e2723"
+        ]
+
+          },
+          "legend": {"title": "ASR (per 100,000)"}
+        },
+        "tooltip": [
+          {"field": "State", "title": "State/Territory"},
+          {"field": "Year", "title": "Year"},
+          {"field": "Count", "title": "Cancer Cases"},
+          {"field": "ASRnum", "title": "ASR (per 100,000)"}
+        ]
+      }
+    },
+    {
+      "data": {"values": [{"note": "Data source: Australian Institute of Health and Welfare"}]},
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "bottom",
+        "fontSize": 13,
+        "color": "black"
+      },
+      "encoding": {
+        "text": {"field": "note"},
+        "x": {"value": 40},
+        "y": {"value": 480}
+      }
+    }
+  ],
+  "config": {
+    "axis": {"domain": false, "grid": false},
+    "view": {"stroke": "transparent"}
+  }
+}
