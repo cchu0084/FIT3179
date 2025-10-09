@@ -9,13 +9,13 @@
 </head>
 <body>
   <h2>Average UV Index Map</h2>
-  <div id="uvmap"></div>
+  <div id="uv-map"></div>
 
   <h2>Melanoma Incidence Map</h2>
   <div id="Incidencemap"></div>
 
   <script type="text/javascript">
-    vegaEmbed('#uvmap', 'uv-map.json').catch(console.error);
+    vegaEmbed('#uv-map', 'uv-map.json').catch(console.error);
     vegaEmbed('#Incidencemap', 'Incidencemap.json').catch(console.error);
   </script>
 </body>
